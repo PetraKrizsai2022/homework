@@ -1,7 +1,5 @@
 package tests.ui;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -9,15 +7,13 @@ import pages.RichTextPage;
 import validation.ValidateRichText;
 
 @Test
-public class RichTextTests {
-    private WebDriver webDriver;
+public class RichTextTests extends BaseTest {
     private RichTextPage richTextPage;
     private ValidateRichText validation = new ValidateRichText();
 
     @BeforeTest
-    private void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe");
-        webDriver = new ChromeDriver();
+    public void setUp() {
+        super.setUp();
     }
 
     @AfterTest

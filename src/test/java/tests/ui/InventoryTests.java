@@ -1,8 +1,5 @@
 package tests.ui;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -11,30 +8,26 @@ import pojo.CredentialDto;
 import validation.ValidateInventoryTest;
 
 import java.io.File;
-import java.io.IOException;
 
 @Test
-public class InventoryTests {
+public class InventoryTests extends BaseTest {
     private final File credentialFile = new File("src/test/resources/credential.json");
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private final ValidateInventoryTest validation = new ValidateInventoryTest();
 
-    private WebDriver webDriver;
     private InventoryPage inventoryPage;
     private String username;
     private String password;
 
     @BeforeTest
-    private void setUp() throws IOException {
-        System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe");
-        webDriver = new ChromeDriver();
-        setCredentials();
-    }
-
-    private void setCredentials() throws IOException {
-        CredentialDto credentialDto = objectMapper.readValue(credentialFile, CredentialDto.class);
-        username = credentialDto.getUsername();
-        password = credentialDto.getPassword();
+    public void setUp() {
+        super.setUp();
+        try {
+            CredentialDto credentialDto = objectMapper.readValue(credentialFile, CredentialDto.class);
+            username = credentialDto.getUsername();
+            password = credentialDto.getPassword();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @AfterTest
