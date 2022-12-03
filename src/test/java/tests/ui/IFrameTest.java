@@ -1,31 +1,26 @@
 package tests.ui;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.IFramePage;
 import validation.ValidateIFrameTest;
 
-import java.io.IOException;
-
 @Test
-public class IFrameTest {
-    private WebDriver webDriver;
+public class IFrameTest extends BaseTest {
     private IFramePage iFramePage;
     private ValidateIFrameTest validation = new ValidateIFrameTest();
 
     @BeforeTest
-    private void setUp() throws IOException {
-        System.setProperty("webdriver.chrome.driver", "C:\\ChromeDriver\\chromedriver.exe");
-        webDriver = new ChromeDriver();
+    public void setUp() {
+        super.setUp();
     }
 
     @AfterTest
     public void quit() {
         webDriver.quit();
     }
+
     @Test
     public void iFramePageTest() throws InterruptedException {
         iFramePage = new IFramePage(webDriver);
